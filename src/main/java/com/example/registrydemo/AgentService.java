@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 @RefreshScope
 public class AgentService {
-    @Value("${lastName}")
+//    @Value("${lastName}")
     String lastName;
 
-    @Value("${foo1}")
+//    @Value("${foo1}")
     String foo1;
 
     @Autowired

@@ -2,7 +2,8 @@ applications:
 - name: registrydemo
   memory: 1G
   routes:
-  - route: registrydemo.pcfbeta.io
+  #- route: registrydemo.pcfbeta.io
+  - route: registrydemo.pcfdemo.com
   path: target/registrydemo-0.0.1-SNAPSHOT.jar
   env:
     SPRING_PROFILES_ACTIVE: profile1
