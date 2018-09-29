@@ -42,7 +42,7 @@ public class RegistrydemoApplication {
 
 	@RequestMapping("/name")
 	public String getName() {
-		return agentService.getName() + " - " + agentService.getLastName() + " foo1: " + agentService.getFoo1();
+		return agentService.getName() + " name: " + agentService.getLastName() + " foo1: " + agentService.getFoo1();
 	}
 
 	public static void main(String[] args) {
