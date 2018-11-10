@@ -20,7 +20,6 @@ resources:
     password: {{deploy-password}}
     skip_cert_check: true
     space: {{pws-space}}
-
 jobs:
   # First job: Package Application as a JAR and Upload to S3 Bucket for storage
 - name: build
@@ -54,10 +53,9 @@ jobs:
           mvn -f pull-registrydemo-source/pom.xml package -Dmaven.repo.local=pull-registrydemo-source/.m2
           cp pull-registrydemo-source/target/registrydemo-0.0.1-SNAPSHOT.jar target/registrydemo-0.0.1-SNAPSHOT.jar
   # Upload build/demo.jar to S3 bucket, 'storage' refers to S3 Resource
-#    - put: storage
-#      params:
-#        file: build/registrydemo-0.0.1-SNAPSHOT.jar
-#        name: registrydemo-0.0.1-SNAPSHOT.jar
+#  - put: gcs-bucket
+#    params:
+#      params: { file: target/registrydemo-0.0.1-SNAPSHOT.jar }
 - name: deploy-app
   serial: true
   public: true
