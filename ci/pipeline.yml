@@ -1,6 +1,7 @@
 groups:
 - name: main
   jobs:
+  - Build
   - deploy-app
   - promote-new-version
 
@@ -21,11 +22,47 @@ resources:
     space: {{pws-space}}
 
 jobs:
+  # First job: Package Application as a JAR and Upload to S3 Bucket for storage
+- name: Build
+  plan:
+  # Check for new commit (trigger=true), 'code' refers to GIT resource
+  - get: pull-registrydemo-source
+    trigger: true
+  # Package and copy application to output 'build' folder
+  - task: compile
+    config:
+      # Use a docker image with Maven to build application
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: maven
+      # 'code' folder contains checkout code
+      inputs:
+        - name: pull-registrydemo-source
+      # 'build' folder is used to store file for next PUT step after RUN step
+      outputs:
+        - name: target
+      caches:
+        - path: pull-registrydemo-source/.m2
+      # RUN step allows inline command and FILE step allow to use external task file
+      run:
+        path: sh
+        args:
+        - -c
+        - |
+          mvn -f pull-registrydemo-source/pom.xml package -Dmaven.repo.local=pull-registrydemo-source/.m2
+          cp pull-registrydemo-source/target/registrydemo-0.0.1-SNAPSHOT.jar target/registrydemo-0.0.1-SNAPSHOT.jar
+  # Upload build/demo.jar to S3 bucket, 'storage' refers to S3 Resource
+#    - put: storage
+#      params:
+#        file: build/registrydemo-0.0.1-SNAPSHOT.jar
+#        name: registrydemo-0.0.1-SNAPSHOT.jar
 - name: deploy-app
   serial: true
   public: true
   plan:
-  - get: pull-registrydemo-source
+  - get: Build
     trigger: true
   - task: get-current-app-color
     file: pull-registrydemo-source/ci/tasks/current-app-get-info.yml
@@ -43,7 +80,7 @@ jobs:
   - put: PWS
     params:
       manifest: app-manifest-output/manifest.yml
-      path: pull-registrydemo-source/registrydemo-0.0.1-SNAPSHOT.jar
+      path: target/registrydemo-0.0.1-SNAPSHOT.jar
 
 - name: promote-new-version
   serial: true
