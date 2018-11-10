@@ -28,7 +28,7 @@ jobs:
   - get: pull-registrydemo-source
     trigger: true
   - task: get-current-app-color
-    file: registrydemo/ci/tasks/current-app-get-info.yml
+    file: pull-registrydemo-source/ci/tasks/current-app-get-info.yml
     params:
       PWS_APP_SUFFIX: {{pws-app-suffix}}
       PWS_API: {{pws-api}}
@@ -37,13 +37,13 @@ jobs:
       PWS_PWD: {{deploy-password}}
       PWS_SPACE: {{pws-space}}
   - task: prepare-app-manifest
-    file: registrydemo/ci/tasks/app-manifest-prep.yml
+    file: pull-registrydemo-source/ci/tasks/app-manifest-prep.yml
     params:
       PWS_APP_SUFFIX: {{pws-app-suffix}}
   - put: PWS
     params:
       manifest: app-manifest-output/manifest.yml
-      path: registrydemo/target/registrydemo-0.0.1-SNAPSHOT.jar
+      path: pull-registrydemo-source/target/registrydemo-0.0.1-SNAPSHOT.jar
 
 - name: promote-new-version
   serial: true
@@ -54,7 +54,7 @@ jobs:
     passed:
       - deploy-app
   - task: get-current-app-color
-    file: registrydemo/ci/tasks/current-app-get-info.yml
+    file: pull-registrydemo-source/ci/tasks/current-app-get-info.yml
     params:
       PWS_APP_SUFFIX: {{pws-app-suffix}}
       PWS_API: {{pws-api}}
@@ -63,7 +63,7 @@ jobs:
       PWS_PWD: {{deploy-password}}
       PWS_SPACE: {{pws-space}}
   - task: switch-app-routes
-    file: registrydemo/ci/tasks/update-routes.yml
+    file: pull-registrydemo-source/ci/tasks/update-routes.yml
     params:
       PWS_APP_SUFFIX: {{pws-app-suffix}}
       PWS_APP_DOMAIN: {{pws-app-domain}}

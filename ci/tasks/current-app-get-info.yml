@@ -14,4 +14,4 @@ outputs:
 - name: current-app-info
 
 run:
-  path: registrydemo/ci/tasks/current-app-get-info
+  path: pull-registrydemo-source/ci/tasks/current-app-get-info
