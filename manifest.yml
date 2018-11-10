@@ -2,12 +2,14 @@ applications:
 - name: registrydemo
   memory: 1G
   routes:
-  - route: registrydemo.pcfbeta.io
-  #- route: registrydemo.pcfdemo.com
+#  - route: registrydemo.pcfbeta.io
+  - route: registrydemo.pcfdemo.com
   path: target/registrydemo-0.0.1-SNAPSHOT.jar
   env:
-    TRUST_CERT: api.run.pcfbeta.io
+#    TRUST_CERT: api.run.pcfbeta.io
+    TRUST_CERT: api.pcfdemo.com
     SPRING_PROFILES_ACTIVE: profile1
   services:
   - eureka-demo
-  - config-server-demo
+  - config-server
+  - hystrix-demo
