@@ -8,10 +8,10 @@ image_resource:
     tag: "latest"
 
 inputs:
-- name: concourse-pipeline-samples
+- name: pull-registrydemo-source
 
 outputs:
 - name: current-app-info
 
 run:
-  path: ci/tasks/current-app-get-info
+  path: registrydemo/ci/tasks/current-app-get-info

@@ -28,7 +28,7 @@ jobs:
   - get: pull-registrydemo-source
     trigger: true
   - task: get-current-app-color
-    file: ci/tasks/current-app-get-info.yml
+    file: registrydemo/ci/tasks/current-app-get-info.yml
     params:
       PWS_APP_SUFFIX: {{pws-app-suffix}}
       PWS_API: {{pws-api}}
@@ -37,7 +37,7 @@ jobs:
       PWS_PWD: {{deploy-password}}
       PWS_SPACE: {{pws-space}}
   - task: prepare-app-manifest
-    file: ci/tasks/app-manifest-prep.yml
+    file: registrydemo/ci/tasks/app-manifest-prep.yml
     params:
       PWS_APP_SUFFIX: {{pws-app-suffix}}
   - put: PWS
@@ -54,7 +54,7 @@ jobs:
     passed:
       - deploy-app
   - task: get-current-app-color
-    file: ci/tasks/current-app-get-info.yml
+    file: registrydemo/ci/tasks/current-app-get-info.yml
     params:
       PWS_APP_SUFFIX: {{pws-app-suffix}}
       PWS_API: {{pws-api}}
@@ -63,7 +63,7 @@ jobs:
       PWS_PWD: {{deploy-password}}
       PWS_SPACE: {{pws-space}}
   - task: switch-app-routes
-    file: ci/tasks/update-routes.yml
+    file: registrydemo/ci/tasks/update-routes.yml
     params:
       PWS_APP_SUFFIX: {{pws-app-suffix}}
       PWS_APP_DOMAIN: {{pws-app-domain}}
