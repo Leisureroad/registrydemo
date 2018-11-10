@@ -1,7 +1,7 @@
 groups:
 - name: main
   jobs:
-  - Build
+  - build
   - deploy-app
   - promote-new-version
 
@@ -23,7 +23,7 @@ resources:
 
 jobs:
   # First job: Package Application as a JAR and Upload to S3 Bucket for storage
-- name: Build
+- name: build
   plan:
   # Check for new commit (trigger=true), 'code' refers to GIT resource
   - get: pull-registrydemo-source
@@ -64,7 +64,7 @@ jobs:
   plan:
   - get: pull-registrydemo-source
     passed:
-      - Build
+      - build
     trigger: true
   - task: get-current-app-color
     file: pull-registrydemo-source/ci/tasks/current-app-get-info.yml
