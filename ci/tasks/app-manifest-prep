@@ -7,4 +7,4 @@ sed "s/APPNAME/$(cat ./current-app-info/next-app.txt)-$PWS_APP_SUFFIX/" ./pull-r
 
 cat ./app-manifest-output/manifest.yml
 
-./pull-registrydemo-source/mvnw clean install
+#./pull-registrydemo-source/mvnw clean install
