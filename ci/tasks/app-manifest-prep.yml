@@ -8,11 +8,11 @@ image_resource:
     tag: "latest"
 
 inputs:
-- name: concourse-pipeline-samples
+- name: pull-registrydemo-source
 - name: current-app-info
 
 outputs:
 - name: app-manifest-output
 
 run:
-  path: ci/tasks/app-manifest-prep
+  path: pull-registrydemo-source/ci/tasks/app-manifest-prep
