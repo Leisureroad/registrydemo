@@ -1,0 +1,74 @@
+groups:
+- name: main
+  jobs:
+  - deploy-app
+  - promote-new-version
+
+resources:
+- name: pull-registrydemo-source
+  type: git
+  source:
+    branch: master
+    uri: https://github.com/Leisureroad/registrydemo.git
+- name: PWS
+  type: cf
+  source:
+    api: {{pws-api}}
+    organization: {{pws-organization}}
+    username: {{deploy-username}}
+    password: {{deploy-password}}
+    skip_cert_check: true
+    space: {{pws-space}}
+
+jobs:
+- name: deploy-app
+  serial: true
+  public: true
+  plan:
+  - get: pull-registrydemo-source
+    trigger: true
+  - task: get-current-app-color
+    file: ci/tasks/current-app-get-info.yml
+    params:
+      PWS_APP_SUFFIX: {{pws-app-suffix}}
+      PWS_API: {{pws-api}}
+      PWS_ORG: {{pws-organization}}
+      PWS_USER: {{deploy-username}}
+      PWS_PWD: {{deploy-password}}
+      PWS_SPACE: {{pws-space}}
+  - task: prepare-app-manifest
+    file: ci/tasks/app-manifest-prep.yml
+    params:
+      PWS_APP_SUFFIX: {{pws-app-suffix}}
+  - put: PWS
+    params:
+      manifest: app-manifest-output/manifest.yml
+      path: registrydemo/target/registrydemo-0.0.1-SNAPSHOT.jar
+
+- name: promote-new-version
+  serial: true
+  public: true
+  plan:
+  - get: pull-registrydemo-source
+    trigger: true
+    passed:
+      - deploy-app
+  - task: get-current-app-color
+    file: ci/tasks/current-app-get-info.yml
+    params:
+      PWS_APP_SUFFIX: {{pws-app-suffix}}
+      PWS_API: {{pws-api}}
+      PWS_ORG: {{pws-organization}}
+      PWS_USER: {{deploy-username}}
+      PWS_PWD: {{deploy-password}}
+      PWS_SPACE: {{pws-space}}
+  - task: switch-app-routes
+    file: ci/tasks/update-routes.yml
+    params:
+      PWS_APP_SUFFIX: {{pws-app-suffix}}
+      PWS_APP_DOMAIN: {{pws-app-domain}}
+      PWS_API: {{pws-api}}
+      PWS_ORG: {{pws-organization}}
+      PWS_USER: {{deploy-username}}
+      PWS_PWD: {{deploy-password}}
+      PWS_SPACE: {{pws-space}}
