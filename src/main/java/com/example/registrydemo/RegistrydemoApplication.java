@@ -56,9 +56,9 @@ public class RegistrydemoApplication {
 		return "None publisher available! ";
 	}
 
-	@RequestMapping("/newAdded")
-	public String updated() {
-		return "Updated!";
+	@RequestMapping("/demo")
+	public String update() {
+		return "Hello concourse!!!";
 	}
 
 	public static void main(String[] args) {
