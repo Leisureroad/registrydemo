@@ -1,6 +1,6 @@
 applications:
-#- name: APPNAME
-- name: registrydemo
+- name: APPNAME
+#- name: registrydemo
   memory: 1G
 #  routes:
 #  - route: registrydemo.apps.pcfone.io
