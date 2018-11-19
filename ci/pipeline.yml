@@ -90,8 +90,8 @@ jobs:
 #  - task: copy-jar-file
 #    inputs:
 #      - name: artifactory-repository
-    outputs:
-      - name: target
+#    outputs:
+#      - name: target
   - put: PWS
     params:
       manifest: app-manifest-output/manifest.yml
