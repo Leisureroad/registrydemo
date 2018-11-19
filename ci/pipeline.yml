@@ -20,15 +20,15 @@ resources:
     password: {{deploy-password}}
     skip_cert_check: true
     space: {{pws-space}}
-- name: artifactory-repository
-  type: artifactory
-  check_every: 1m
-  source:
-    endpoint: http://10.34.53.16:8081/artifactory
-    repository: "/myrepo"
-    regex: "registrydemo-(?<version>.*).jar"
-    username: admin
-    password: password
+#- name: artifactory-repository
+#  type: artifactory
+#  check_every: 1m
+#  source:
+#    endpoint: http://10.34.53.16:8081/artifactory
+#    repository: "/myrepo"
+#    regex: "registrydemo-(?<version>.*).jar"
+#    username: admin
+#    password: password
 jobs:
 #  First job: Package Application as a JAR and Upload to S3 Bucket for storage
 - name: build
@@ -61,11 +61,12 @@ jobs:
          - |
            mvn -f pull-registrydemo-source/pom.xml package -Dmaven.repo.local=pull-registrydemo-source/.m2
            ls -al ./target/
+           curl -uadmin:AP2eUJGk81RwYFjj6RJdrve2MXY -T target/registrydemo-0.0.1-SNAPSHOT.jar "http://localhost:8081/artifactory/myrepo/registrydemo-0.0.1-SNAPSHOT.jar"
 #           cp target/registrydemo-*.jar target/registrydemo-0.0.1-SNAPSHOT.jar
   #  Upload build/demo.jar to S3 bucket, 'storage' refers to S3 Resource
-   - put: artifactory-repository
-     params:
-       params: { file: ./target/registrydemo-*.jar }
+#   - put: artifactory-repository
+#     params:
+#       params: { file: ./target/registrydemo-*.jar }
 - name: deploy-app
   serial: true
   public: true
