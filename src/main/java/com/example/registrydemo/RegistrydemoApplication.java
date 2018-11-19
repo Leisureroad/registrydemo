@@ -56,6 +56,11 @@ public class RegistrydemoApplication {
 		return "None publisher available! ";
 	}
 
+	@RequestMapping("/newAdded")
+	public String updated() {
+		return "Updated!";
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(RegistrydemoApplication.class, args);
 	}
