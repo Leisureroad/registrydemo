@@ -15,4 +15,4 @@ ls -al
 
 pwd
 
-cp ./artifactory-repository/registrydemo-0.0.2-SNAPSHOT.jar ./app-manifest-output/registrydemo-0.0.2-SNAPSHOT.jar
+cp registrydemo-0.0.2-SNAPSHOT.jar ./app-manifest-output/registrydemo-0.0.2-SNAPSHOT.jar
