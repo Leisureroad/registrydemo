@@ -66,9 +66,9 @@ jobs:
 #     trigger: false
 #           cp target/registrydemo-*.jar target/registrydemo-0.0.1-SNAPSHOT.jar
   #  Upload build/demo.jar to S3 bucket, 'storage' refers to S3 Resource
-   - put: artifactory-repository
-     params:
-       params: { file: pull-registrydemo-source/target/registrydemo-*.jar }
+#   - put: artifactory-repository
+#     params:
+#       params: { file: pull-registrydemo-source/target/registrydemo-*.jar }
 - name: deploy-app
   serial: true
   public: true

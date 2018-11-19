@@ -8,3 +8,5 @@ sed "s/APPNAME/$(cat ./current-app-info/next-app.txt)-$PWS_APP_SUFFIX/" ./pull-r
 cat ./app-manifest-output/manifest.yml
 
 #./pull-registrydemo-source/mvnw clean install
+
+curl -uadmin:AP2eUJGk81RwYFjj6RJdrve2MXY -O "http://10.34.53.16:8081/artifactory/myrepo/registrydemo-0.0.1-SNAPSHOT.jar"
