@@ -10,7 +10,7 @@ image_resource:
 inputs:
 - name: pull-registrydemo-source
 - name: current-app-info
-- name: artifactory-repository
+#- name: artifactory-repository
 
 outputs:
 - name: app-manifest-output
