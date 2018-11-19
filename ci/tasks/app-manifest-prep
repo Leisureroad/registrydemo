@@ -13,4 +13,6 @@ curl -uadmin:AP2eUJGk81RwYFjj6RJdrve2MXY -O "http://10.34.53.16:8081/artifactory
 
 ls -al
 
-cp registrydemo-0.0.1-SNAPSHOT.jar ./pull-registrydemo-source/
+pwd
+
+cp registrydemo-0.0.1-SNAPSHOT.jar /tmp/build/put/pull-registrydemo-source/registrydemo-0.0.1-SNAPSHOT.jar
