@@ -71,7 +71,6 @@ jobs:
   serial: true
   public: true
   plan:
-  - get: artifactory-repository
   - get: pull-registrydemo-source
     trigger: true
     passed:
@@ -89,6 +88,7 @@ jobs:
     file: pull-registrydemo-source/ci/tasks/app-manifest-prep.yml
     params:
       PWS_APP_SUFFIX: {{pws-app-suffix}}
+  - get: artifactory-repository
   - task: copy-jar-file
     config:
       platform: linux
