@@ -60,8 +60,8 @@ jobs:
          - -c
          - |
            mvn -f pull-registrydemo-source/pom.xml package -Dmaven.repo.local=pull-registrydemo-source/.m2
-           ls -al
-           cp pull-registrydemo-source/target/registrydemo-*.jar target/registrydemo-0.0.1-SNAPSHOT.jar
+           ls -al ./target/
+#           cp target/registrydemo-*.jar target/registrydemo-0.0.1-SNAPSHOT.jar
   #  Upload build/demo.jar to S3 bucket, 'storage' refers to S3 Resource
    - put: artifactory-repository
      params:
