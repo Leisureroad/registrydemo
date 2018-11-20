@@ -40,6 +40,7 @@ jobs:
 - name: build
   plan:
    # Check for new commit (trigger=true), 'code' refers to GIT resource
+   - get: artifactory-repository
    - get: pull-registrydemo-source
      trigger: true
    # Package and copy application to output 'build' folder
@@ -54,6 +55,7 @@ jobs:
        # 'code' folder contains checkout code
        inputs:
          - name: pull-registrydemo-source
+         - name: artifactory-repository
        # 'build' folder is used to store file for next PUT step after RUN step
        outputs:
          - name: target
