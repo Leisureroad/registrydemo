@@ -40,7 +40,6 @@ jobs:
 - name: build
   plan:
    # Check for new commit (trigger=true), 'code' refers to GIT resource
-   - get: artifactory-repository
    - get: pull-registrydemo-source
      trigger: true
    # Package and copy application to output 'build' folder
@@ -55,7 +54,6 @@ jobs:
        # 'code' folder contains checkout code
        inputs:
          - name: pull-registrydemo-source
-         - name: artifactory-repository
        # 'build' folder is used to store file for next PUT step after RUN step
        outputs:
          - name: target
@@ -72,10 +70,6 @@ jobs:
            mv pull-registrydemo-source/target/registrydemo-0.0.1-SNAPSHOT.jar target/registrydemo-0.0.3-SNAPSHOT.jar
            ls -al target/registrydemo-0.0.3-SNAPSHOT.jar
 #           curl -uadmin:AP2eUJGk81RwYFjj6RJdrve2MXY -T pull-registrydemo-source/target/registrydemo-0.0.1-SNAPSHOT.jar "http://10.34.53.16:8081/artifactory/myrepo/registrydemo-0.0.2-SNAPSHOT.jar"
-#   - get: artifactory-repository
-#     trigger: false
-#           cp target/registrydemo-*.jar target/registrydemo-0.0.1-SNAPSHOT.jar
-  #  Upload build/demo.jar to S3 bucket, 'storage' refers to S3 Resource
    - put: artifactory-repository
      params: { file: target/registrydemo-*.jar }
 - name: deploy-app
@@ -99,58 +93,10 @@ jobs:
     file: pull-registrydemo-source/ci/tasks/app-manifest-prep.yml
     params:
       PWS_APP_SUFFIX: {{pws-app-suffix}}
-#  - get: artifactory-repository
-#    trigger: true
-#    passed:
-#      - build
-#  - task: copy-jar-file
-#    config:
-#      platform: linux
-#      image_resource:
-#        type: docker-image
-#        source:
-#          repository: ubuntu
-#      inputs:
-#        - name: artifactory-repository
-#      outputs:
-#        - name: target
-#      run:
-#        path: sh
-#        args:
-#        - -c
-#        - |
-#          cp artifactory-repository/registrydemo-*.jar target/registrydemo-0.0.1-SNAPSHOT.jar
-#   - task: get-jar-file
-#     config:
-##       # Use a docker image with Maven to build application
-##       platform: linux
-##       image_resource:
-##         type: docker-image
-##         source:
-##           repository: maven
-##       # 'code' folder contains checkout code
-#       inputs:
-#         - name: pull-registrydemo-source
-##       # 'build' folder is used to store file for next PUT step after RUN step
-#       outputs:
-#         - name: target
-##       caches:
-##         - path: pull-registrydemo-source/.m2
-##       # RUN step allows inline command and FILE step allow to use external task file
-#       run:
-#         path: sh
-#         args:
-#         - -c
-#         - |
-##           mvn -f pull-registrydemo-source/pom.xml package -Dmaven.repo.local=pull-registrydemo-source/.m2
-##           ls -al
-#           curl -uadmin:AP2eUJGk81RwYFjj6RJdrve2MXY -O "http://10.34.53.16:8081/artifactory/myrepo/registrydemo-0.0.1-SNAPSHOT.jar"
-#           cp registrydemo-0.0.1-SNAPSHOT.jar target/registrydemo-0.0.1-SNAPSHOT.jar
   - get: artifactory-repository
   - put: PWS
     params:
       manifest: app-manifest-output/manifest.yml
-#      path: app-manifest-output/registrydemo-0.0.2-SNAPSHOT.jar
       path: artifactory-repository/registrydemo-0.0.3-SNAPSHOT.jar
 
 - name: promote-new-version
