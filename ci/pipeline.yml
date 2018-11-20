@@ -30,11 +30,11 @@ resources:
   type: artifactory
   check_every: 1m
   source:
-    endpoint: http://10.34.53.16:8081/artifactory
-    repository: "/myrepo"
-    regex: "registrydemo-(?<version>.*).jar"
-    username: admin
-    password: password
+    endpoint: {{jfrog-endpoint}}
+    repository: {{jfrog-repository}}
+    regex: {{jfrog-regex}}
+    username: {{jfrog-username}}
+    password: {{jfrog-password}}
 jobs:
 #  First job: Package Application as a JAR and Upload to S3 Bucket for storage
 - name: build
