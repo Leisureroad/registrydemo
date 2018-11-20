@@ -9,10 +9,10 @@ cat ./app-manifest-output/manifest.yml
 
 #./pull-registrydemo-source/mvnw clean install
 
-curl -uadmin:AP2eUJGk81RwYFjj6RJdrve2MXY -O "http://10.34.53.16:8081/artifactory/myrepo/registrydemo-0.0.2-SNAPSHOT.jar"
+#curl -uadmin:AP2eUJGk81RwYFjj6RJdrve2MXY -O "http://10.34.53.16:8081/artifactory/myrepo/registrydemo-0.0.2-SNAPSHOT.jar"
 
-ls -al
+#ls -al
 
-pwd
+#pwd
 
-cp registrydemo-0.0.2-SNAPSHOT.jar ./app-manifest-output/registrydemo-0.0.2-SNAPSHOT.jar
+#cp registrydemo-0.0.2-SNAPSHOT.jar ./app-manifest-output/registrydemo-0.0.2-SNAPSHOT.jar

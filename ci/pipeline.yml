@@ -67,14 +67,15 @@ jobs:
          - |
            mvn -f pull-registrydemo-source/pom.xml package -Dmaven.repo.local=pull-registrydemo-source/.m2
            ls -al
-           curl -uadmin:AP2eUJGk81RwYFjj6RJdrve2MXY -T pull-registrydemo-source/target/registrydemo-0.0.1-SNAPSHOT.jar "http://10.34.53.16:8081/artifactory/myrepo/registrydemo-0.0.2-SNAPSHOT.jar"
-   - get: artifactory-repository
+           mv pull-registrydemo-source/target/registrydemo-0.0.1-SNAPSHOT.jar pull-registrydemo-source/target/registrydemo-0.0.3-SNAPSHOT.jar
+#           curl -uadmin:AP2eUJGk81RwYFjj6RJdrve2MXY -T pull-registrydemo-source/target/registrydemo-0.0.1-SNAPSHOT.jar "http://10.34.53.16:8081/artifactory/myrepo/registrydemo-0.0.2-SNAPSHOT.jar"
+#   - get: artifactory-repository
 #     trigger: false
 #           cp target/registrydemo-*.jar target/registrydemo-0.0.1-SNAPSHOT.jar
   #  Upload build/demo.jar to S3 bucket, 'storage' refers to S3 Resource
-#   - put: artifactory-repository
-#     params:
-#       params: { file: pull-registrydemo-source/target/registrydemo-*.jar }
+   - put: artifactory-repository
+     params:
+       params: { file: pull-registrydemo-source/target/registrydemo-*.jar }
 - name: deploy-app
   serial: true
   public: true
@@ -83,7 +84,6 @@ jobs:
     trigger: true
     passed:
       - build
-#  - get: artifactory-repository
   - task: get-current-app-color
     file: pull-registrydemo-source/ci/tasks/current-app-get-info.yml
     params:
@@ -144,10 +144,12 @@ jobs:
 ##           ls -al
 #           curl -uadmin:AP2eUJGk81RwYFjj6RJdrve2MXY -O "http://10.34.53.16:8081/artifactory/myrepo/registrydemo-0.0.1-SNAPSHOT.jar"
 #           cp registrydemo-0.0.1-SNAPSHOT.jar target/registrydemo-0.0.1-SNAPSHOT.jar
+  - get: artifactory-repository
   - put: PWS
     params:
       manifest: app-manifest-output/manifest.yml
-      path: app-manifest-output/registrydemo-0.0.2-SNAPSHOT.jar
+#      path: app-manifest-output/registrydemo-0.0.2-SNAPSHOT.jar
+      path: artifactory-repository/registrydemo-0.0.3-SNAPSHOT.jar
 
 - name: promote-new-version
   serial: true
