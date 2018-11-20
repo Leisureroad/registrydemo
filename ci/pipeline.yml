@@ -68,7 +68,7 @@ jobs:
          - |
            mvn -f pull-registrydemo-source/pom.xml package -Dmaven.repo.local=pull-registrydemo-source/.m2
            ls -al
-           mv pull-registrydemo-source/target/registrydemo-0.0.1-SNAPSHOT.jar target/registrydemo-0.0.3-SNAPSHOT.jar
+           cp pull-registrydemo-source/target/registrydemo-0.0.1-SNAPSHOT.jar target/registrydemo-0.0.3-SNAPSHOT.jar
            ls -al target/registrydemo-0.0.3-SNAPSHOT.jar
 #           curl -uadmin:AP2eUJGk81RwYFjj6RJdrve2MXY -T pull-registrydemo-source/target/registrydemo-0.0.1-SNAPSHOT.jar "http://10.34.53.16:8081/artifactory/myrepo/registrydemo-0.0.2-SNAPSHOT.jar"
    - put: artifactory-repository

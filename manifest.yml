@@ -5,7 +5,7 @@ applications:
 #  routes:
 #  - route: registrydemo.apps.pcfone.io
 #  - route: main-registrydemo.pcfdemo.com
-  path: target/registrydemo-0.0.1-SNAPSHOT.jar
+#  path: target/registrydemo-0.0.1-SNAPSHOT.jar
   env:
 #    TRUST_CERT: api.run.pcfbeta.io
     TRUST_CERT: api.pcfdemo.com
