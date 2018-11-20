@@ -39,6 +39,7 @@ jobs:
 #  First job: Package Application as a JAR and Upload to S3 Bucket for storage
 - name: build
   plan:
+   - get: artifactory-repository
    # Check for new commit (trigger=true), 'code' refers to GIT resource
    - get: pull-registrydemo-source
      trigger: true
