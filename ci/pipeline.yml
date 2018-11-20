@@ -31,7 +31,7 @@ resources:
   check_every: 1m
   source:
     endpoint: http://10.34.53.16:8081/artifactory
-    repository: "/newrepo"
+    repository: "/myrepo"
     regex: "registrydemo-(?<version>.*).jar"
     username: admin
     password: password
