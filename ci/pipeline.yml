@@ -5,6 +5,12 @@ groups:
   - deploy-app
   - promote-new-version
 
+resource_types:
+- name: artifactory
+  type: docker-image
+  source:
+    repository: pivotalservices/artifactory-resource
+
 resources:
 - name: pull-registrydemo-source
   type: git
