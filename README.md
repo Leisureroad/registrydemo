@@ -1,7 +1,7 @@
 # registrydemo
 Spring microservice demo for PCF. Register application to service registry, access rest api of publisher app, access properties of config server, and hystrix sample with fallback method.
 
-version: 2019.06.24-V0.10
+version: 2019.06.24-V0.11
 
 #Concourse部署脚本
 test:test
