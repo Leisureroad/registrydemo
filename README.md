@@ -16,6 +16,6 @@ https://github.com/pivotalservices/concourse-pipeline-samples
 docker pull docker.bintray.io/jfrog/artifactory-oss:latest
 docker run --name artifactory -d -p 8081:8081 docker.bintray.io/jfrog/artifactory-oss:latest
 admin:password
-curl -uadmin:password -O "http://localhost:8082/artifactory/myrepo/registrydemo-v0.1.jar"
+curl -uadmin:password -T registrydemo-v0.1.jar "http://localhost:8082/artifactory/myrepo/registrydemo-v0.1.jar"
 
 Notes: use manifest.yml.bak, update jfrog ip address
