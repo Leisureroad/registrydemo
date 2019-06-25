@@ -58,7 +58,7 @@ public class RegistrydemoApplication {
 
 	@RequestMapping("/demo")
 	public String update() {
-		return "Hello concourse!!!-V0.9";
+		return "Hello concourse!!!-V1.0";
 	}
 
 	public static void main(String[] args) {
