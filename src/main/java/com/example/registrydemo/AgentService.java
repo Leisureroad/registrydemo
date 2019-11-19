@@ -14,6 +14,9 @@ public class AgentService {
     @Value("${foo1}")
     String foo1;
 
+    @Value("${age}")
+    int age;
+
     @Autowired
     AgentClient agentClient;
 
@@ -28,4 +31,6 @@ public class AgentService {
     public String getFoo1() {
         return foo1;
     }
+
+    public int getAge() {return age;}
 }

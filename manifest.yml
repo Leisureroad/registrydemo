@@ -1,6 +1,6 @@
 applications:
-- name: APPNAME
-#- name: registrydemo
+#- name: APPNAME
+- name: registrydemo
   memory: 1G
 #  routes:
 #  - route: registrydemo.apps.pcfone.io
@@ -8,8 +8,10 @@ applications:
   path: target/registrydemo-0.0.1-SNAPSHOT.jar
   env:
 #    TRUST_CERT: api.run.pcfbeta.io
-#    TRUST_CERT: api.run.pcfone.io
-    TRUST_CERT: api.pcfdemo.com
+    TRUST_CERT: api.run.pcfone.io
+#    TRUST_CERT: api.run.haas-443.pez.pivotal.io
+#    TRUST_CERT: api.pcfdemo.com
+#    TRUST_CERT: api.ndjg.com
     SPRING_PROFILES_ACTIVE: profile1
   services:
   - eureka-demo
